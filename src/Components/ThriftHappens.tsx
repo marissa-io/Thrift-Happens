@@ -1,9 +1,16 @@
 import { useState } from "react";
 import type { ClothingProduct } from "../data/data";
 import ItemsContainer from "./ItemsContainer"
+import CheckoutContainer from "./CheckoutContainer";
 
 interface ClothingProductData{
     data: ClothingProduct[];
+}
+
+export interface ItemsContainerProps{
+    products: CheckoutItem[];
+    handleChangeQuantity: (id: number, delta: number) => void; 
+    handleAddToCart: (cartItem: CartItem) => void;
 }
 
 export interface CheckoutItem{
@@ -18,6 +25,14 @@ export interface CheckoutItem{
     price: number;
     quantity: number; //remaining stock
     itemQuantity: number; // selected
+}
+
+export interface CartItem{
+  id: number;
+  name: string;
+  price: number;
+  quantity: number; //amount in cart
+  total: number;
 }
 
 export default function ThriftHappens({ data }: ClothingProductData){
@@ -38,6 +53,8 @@ export default function ThriftHappens({ data }: ClothingProductData){
     })),
     );
 
+    //Start with empty cart
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
 function handleChangeQuantity(id: number, delta: number) {
   setItems((prevData) =>
@@ -54,10 +71,49 @@ function handleChangeQuantity(id: number, delta: number) {
     )
   );
 }
+
+//start cart at empty
+
+function handleAddToCart(cartItem: CartItem){
+if(cartItem.quantity <= 0) return;
+
+setCartItems((prevItems)=>{
+  const isExisting = prevItems.find((item)=> item.id === cartItem.id);
+
+if(isExisting) {
+  return prevItems.map((item)=>
+  item.id === cartItem.id 
+? {...item,
+  quantity: item.quantity + cartItem.quantity,
+  total: item.total + cartItem.total
+}
+:item
+);
+}
+return [...prevItems, cartItem];
+})
+
+setItems((prevData)=>
+prevData.map((item)=>
+item.id === cartItem.id
+?{
+  ...item,
+  quantity: item.quantity -cartItem.quantity,
+  itemQuantity: 0
+}
+:item
+))
+}
        
-    return ( <ItemsContainer
+    return ( 
+    <>
+    <ItemsContainer
      products={items} 
-     handleChangeQuantity={handleChangeQuantity}/>
+     handleChangeQuantity={handleChangeQuantity}
+     handleAddToCart={handleAddToCart}
+     />
+     <CheckoutContainer cartItems={cartItems} />
+</>
 );
 
 }

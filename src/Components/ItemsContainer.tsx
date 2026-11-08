@@ -1,14 +1,12 @@
-import type { CheckoutItem } from "./ThriftHappens";
+import type { ItemsContainerProps } from "./ThriftHappens";
 import ItemCard from "./ItemCard";
 
-interface ItemsContainerProps{
-    products: CheckoutItem[];
-    handleChangeQuantity: (id: number, delta: number) => void; 
-}
+
 
 export default function ItemsContainer({
     products,
     handleChangeQuantity,
+    handleAddToCart,
 }: ItemsContainerProps){
 return (
     <div>
@@ -18,6 +16,7 @@ return (
     {...product}
     handleChangeQuantity={(delta: number) =>
         handleChangeQuantity(product.id, delta)} 
+        handleAddToCart={handleAddToCart}
     />
         ))}
     </div>
