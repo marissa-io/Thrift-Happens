@@ -2,7 +2,6 @@ import type { ItemsContainerProps } from "./ThriftHappens";
 import ItemCard from "./ItemCard";
 
 
-
 export default function ItemsContainer({
     products,
     handleChangeQuantity,

@@ -75,8 +75,9 @@ function handleChangeQuantity(id: number, delta: number) {
 //start cart at empty
 
 function handleAddToCart(cartItem: CartItem){
-if(cartItem.quantity <= 0) return;
+const selectedItem = items.find((item) => item.id === cartItem.id);
 
+if(!selectedItem || cartItem.quantity <= 0 || cartItem.quantity > selectedItem.quantity) return;
 setCartItems((prevItems)=>{
   const isExisting = prevItems.find((item)=> item.id === cartItem.id);
 

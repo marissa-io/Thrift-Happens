@@ -1,15 +1,14 @@
-import type { ClothingProduct} from "../data/data";
 import type { CheckoutItem, CartItem } from "./ThriftHappens";
 
 
-interface ItemCardProps extends ClothingProduct{
-    productInfo: CheckoutItem;
+interface ItemCardProps extends CheckoutItem{
     handleChangeQuantity: (delta: number) => void;
     handleAddToCart: (cartItem: CartItem) => void;
     
 }
 
 export default function ItemCard({
+    id,
     name,
     image,
     fit,
@@ -18,7 +17,6 @@ export default function ItemCard({
     description,
     size,
     price,
-    productInfo,
     quantity,
     itemQuantity,
     handleChangeQuantity,
@@ -53,11 +51,11 @@ export default function ItemCard({
     <button
     disabled={itemQuantity === 0}
     onClick={()=> handleAddToCart({
-        id: productInfo.id,
-        name: productInfo.name,
-        price: productInfo.price,
-        quantity: productInfo.quantity,
-        total: productInfo.price *productInfo.quantity,
+        id,
+        name,
+        price,
+        quantity: itemQuantity,
+        total: price * itemQuantity,
     })}>Add to Cart</button>
 
         </div>
