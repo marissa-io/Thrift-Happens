@@ -1,4 +1,3 @@
-import type { ClothingProduct } from "../data/data";
 
 interface ItemCardProps{
     id: number;
@@ -10,7 +9,9 @@ interface ItemCardProps{
     description: string;
     size: string;
     price: number;
-    quantity: number;
+    quantity: number
+    itemQuantity: number;
+    handleChangeQuantity: (delta: number) => void;
 }
 
 export default function ItemCard({
@@ -23,10 +24,14 @@ export default function ItemCard({
     size,
     price,
     quantity,
+    itemQuantity,
+    handleChangeQuantity,
 }: ItemCardProps){
+
+    const outOfStock = quantity === 0;
     return (
         <div>
-            <img src={image} />
+            <img src={image} alt={name} />
             <h3>{name}</h3>
             {/* TODO find a better format for these */}
             <p>{fit}</p>
@@ -35,7 +40,20 @@ export default function ItemCard({
             <p>{description}</p>
             <p>Size: {size}</p>
             <p>${price.toFixed(2)}</p>
-            <p>In stock: {quantity}</p>
+            <p>{outOfStock ? "Out of Stock" : `In Stock: ${quantity}`}</p>
+
+
+            <button onClick={() => handleChangeQuantity(-1)}
+                disabled={outOfStock || itemQuantity === 0}
+                >{" - "}
+                </button>
+            <span>{itemQuantity}</span> 
+            <button onClick={() => handleChangeQuantity(1)}
+            disabled={outOfStock || itemQuantity >= quantity}
+>
+    {" + "}
+    </button>
+
         </div>
     );
 }
