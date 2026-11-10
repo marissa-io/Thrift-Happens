@@ -107,12 +107,28 @@ item.id === cartItem.id
 ))
 }
 
+//Empties cart and restores each products quantity.
 function handleEmptyCart(){
+setItems((prevData) =>
+prevData.map((item)=>{
+  const cartItem= cartItems.find((cart)=> cart.id === item.id);
+  return cartItem
+  ?{...item, quantity: item.quantity + cartItem.quantity}
+  :item;
+}))
+
   setCartItems([]);
 }
 
-//removes one item from checkout
+//removes one item from checkout and restores stock belonging to the removed item.
 function handleRemoveFromCart (id: number) {
+const removedItem = cartItems.find((item)=> item.id === id);
+if (!removedItem) return;
+setItems((prevData)=> prevData.map((item)=>
+item.id === id
+?{...item, quantity: item.quantity + removedItem.quantity}
+:item
+))
   setCartItems((prevItems)=>{
     return prevItems.filter((item)=> item.id !== id);
   })

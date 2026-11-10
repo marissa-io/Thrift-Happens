@@ -19,8 +19,8 @@ handleRemoveFromCart,
     <div>
         <img src={image} alt={name}></img>
         <p>{name}</p>
-        <p>Price: {price.toFixed(2)}</p>
-        <p>Quantity: ${quantity}</p>
+        <p>Price: ${price.toFixed(2)}</p>
+        <p>Quantity: {quantity}</p>
         <p>Subtotal: ${total.toFixed(2)}</p>
 <button onClick={()=> handleRemoveFromCart(id)}>Delete</button>
     </div>
