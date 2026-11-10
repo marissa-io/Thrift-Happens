@@ -30,6 +30,7 @@ export interface CheckoutItem{
 export interface CartItem{
   id: number;
   name: string;
+  image: string;
   price: number;
   quantity: number; //amount in cart
   total: number;
@@ -113,7 +114,7 @@ item.id === cartItem.id
      handleChangeQuantity={handleChangeQuantity}
      handleAddToCart={handleAddToCart}
      />
-     <CheckoutContainer cartItems={cartItems} />
+     <CheckoutContainer checkoutData={cartItems} />
 </>
 );
 

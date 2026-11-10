@@ -53,6 +53,7 @@ export default function ItemCard({
     onClick={()=> handleAddToCart({
         id,
         name,
+        image,
         price,
         quantity: itemQuantity,
         total: price * itemQuantity,
