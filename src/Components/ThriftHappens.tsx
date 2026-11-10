@@ -106,6 +106,17 @@ item.id === cartItem.id
 :item
 ))
 }
+
+function handleEmptyCart(){
+  setCartItems([]);
+}
+
+//removes one item from checkout
+function handleRemoveFromCart (id: number) {
+  setCartItems((prevItems)=>{
+    return prevItems.filter((item)=> item.id !== id);
+  })
+}
        
     return ( 
     <>
@@ -114,7 +125,11 @@ item.id === cartItem.id
      handleChangeQuantity={handleChangeQuantity}
      handleAddToCart={handleAddToCart}
      />
-     <CheckoutContainer checkoutData={cartItems} />
+     <CheckoutContainer 
+     checkoutData={cartItems}
+     handleEmptyCart={handleEmptyCart}
+    handleRemoveFromCart={handleRemoveFromCart}
+ />
 </>
 );
 
