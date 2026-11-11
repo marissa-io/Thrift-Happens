@@ -15,13 +15,15 @@ export default function CheckoutContainer({
 
     return (
         <div>
+            <h2 id="checkoutTitle">Checkout</h2>
+        <div className="checkoutItems">
             {checkoutData.map((item)=>(
                 <CheckoutCard key={item.id}
                 {...item}
                 handleRemoveFromCart={handleRemoveFromCart}
                 />
             ))}
-
+</div>
             <h2>
                 {checkoutData.length > 0
                 ?`Total: $${checkoutData.reduce((acc,item)=> acc + item.total, 0).toFixed(2)}`

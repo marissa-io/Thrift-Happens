@@ -9,6 +9,9 @@ export default function App(){
   <>
   <NavBar />
 
+<div>
+  <h1>Welcome to Thrift Happens!</h1>
+</div>
 
 <div id="shop">
     <ThriftHappens data={products}/>
