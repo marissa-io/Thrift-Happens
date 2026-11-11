@@ -141,11 +141,13 @@ item.id === id
      handleChangeQuantity={handleChangeQuantity}
      handleAddToCart={handleAddToCart}
      />
+     <div id="checkout">
      <CheckoutContainer 
      checkoutData={cartItems}
      handleEmptyCart={handleEmptyCart}
     handleRemoveFromCart={handleRemoveFromCart}
  />
+ </div>
 </>
 );
 
