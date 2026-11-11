@@ -14,7 +14,7 @@ total, //line subtotal
 handleRemoveFromCart,
 }: CheckoutCardProps) {
 
-    //TODO: Show empty when applicable
+    //Show empty when applicable
     return (
     <div>
         <img src={image} alt={name}></img>

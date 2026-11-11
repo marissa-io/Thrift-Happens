@@ -37,7 +37,7 @@ export interface CartItem{
 }
 
 export default function ThriftHappens({ data }: ClothingProductData){
-  
+  // initialize product data
     const [items, setItems] = useState<CheckoutItem[]>(()=>
     data.map((product)=> ({
         id: product.id,
@@ -57,6 +57,9 @@ export default function ThriftHappens({ data }: ClothingProductData){
     //Start with empty cart
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
+
+    // update selected quantity of product, preventing a below zero
+    // prevents from exceeding available stock
 function handleChangeQuantity(id: number, delta: number) {
   setItems((prevData) =>
     prevData.map((item) =>
@@ -73,8 +76,7 @@ function handleChangeQuantity(id: number, delta: number) {
   );
 }
 
-//start cart at empty
-
+// add products selected to cart and update stock
 function handleAddToCart(cartItem: CartItem){
 const selectedItem = items.find((item) => item.id === cartItem.id);
 

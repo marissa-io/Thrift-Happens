@@ -9,6 +9,7 @@ export default function ItemsContainer({
 }: ItemsContainerProps){
 return (
     <div>
+        {/* create an itemcard for each product */}
         {products.map((product) =>(
     <ItemCard 
     key={product.id}
